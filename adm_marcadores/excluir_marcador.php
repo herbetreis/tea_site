@@ -9,19 +9,23 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 
 // Verifique a conexão
 if ($conn->connect_error) {
-    die("Erro de conexão com o banco de dados: " . $conn->connect_error);
+    $response = array("success" => false, "message" => "Erro de conexão com o banco de dados: " . $conn->connect_error);
+    echo json_encode($response);
+    exit;
 }
 
 // Receba o ID do marcador a ser excluído do POST
-$id_marcador = $_POST['id_marcador'];
+$id_marcador = $_POST['id'];
 
 // Execute a operação de exclusão no banco de dados
 $sql = "DELETE FROM marcadores WHERE id = $id_marcador";
 
 if ($conn->query($sql) === TRUE) {
-    echo "Marcador excluído com sucesso!";
+    $response = array("success" => true, "message" => "Marcador excluído com sucesso!");
+    echo json_encode($response);
 } else {
-    echo "Erro ao excluir o marcador: " . $conn->error;
+    $response = array("success" => false, "message" => "Erro ao excluir o marcador: " . $conn->error);
+    echo json_encode($response);
 }
 
 // Feche a conexão com o banco de dados

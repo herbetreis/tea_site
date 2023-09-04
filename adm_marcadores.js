@@ -34,10 +34,30 @@ document.addEventListener("DOMContentLoaded", function () {
                 const excluirMarcadorButton = document.getElementById("excluirMarcador");
                 excluirMarcadorButton.addEventListener("click", function () {
                     // Adicione aqui a lógica para excluir o marcador (você precisará fazer uma solicitação AJAX para o servidor)
-                    // Depois de excluir com sucesso, você pode fechar o modal
-                    const editarMarcadorModal = new bootstrap.Modal(document.getElementById("editarMarcadorModal"));
-                    editarMarcadorModal.hide();
+                    const marcadorId = marcador.id; // ID do marcador a ser excluído
+                    // Faça uma solicitação AJAX para excluir o marcador
+                    fetch("../tea_site/adm_marcadores/excluir_marcador.php", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/x-www-form-urlencoded" // Altere o tipo de conteúdo para "application/x-www-form-urlencoded"
+                        },
+                        body: "id=" + encodeURIComponent(marcadorId) // Envie o ID como parte do corpo da solicitação
+                    })
+                    .then(response => response.json())
+                    .then(result => {
+                        if (result.success) {
+                            // Marcador excluído com sucesso, você pode atualizar a tabela ou fazer outras ações aqui
+                            console.log("Marcador excluído com sucesso!");
+                            // Feche o modal após a exclusão
+                            const editarMarcadorModal = new bootstrap.Modal(document.getElementById("editarMarcadorModal"));
+                            editarMarcadorModal.hide();
+                        } else {
+                            console.error("Erro ao excluir o marcador:", result.message);
+                        }
+                    })
+                    .catch(error => console.error("Erro ao excluir o marcador:", error));
                 });
+                
 
                 // Ative o modal de edição/exclusão
                 const editarMarcadorModal = new bootstrap.Modal(document.getElementById("editarMarcadorModal"));
