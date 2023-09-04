@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEA SITE</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="container.css">
+    <title>Mapa com Pesquisa</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6_R58fodoRdXQZHsjPXrO0a2USwavEiA&libraries=places" defer></script>
+  </head>
+  <body>
+    <div class="container">
+      <a href='./main.html'><button>HOME</button></a> <a href='./cadastrar_marcadores.html'><button>CADASTRAR MARCADORES</button></a>
+    <input
+      id="search-input"
+      type="text"
+      placeholder="PROCURE UM PROFISSIONAL"
+      style="width: 450px; margin: 10px;"/>
+    <div id="map" style="width: 100%; height: 400px;"></div>
+
+    <!-- Inclua o código JavaScript para recuperar os marcadores e adicioná-los ao mapa -->
+    <script>
+      function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: { lat: -34.397, lng: 150.644 }, // Coordenadas iniciais
+          zoom: 8
+        });
+
+        // Use AJAX para obter os dados dos marcadores do arquivo get_marcadores.php
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            var marcadores = JSON.parse(xhr.responseText);
+
+            // Itere sobre os dados dos marcadores e adicione-os ao mapa
+            marcadores.forEach(function (marcador) {
+              var marker = new google.maps.Marker({
+                position: { lat: parseFloat(marcador.latitude), lng: parseFloat(marcador.longitude) },
+                map: map,
+                title: marcador.nome
+              });
+            });
+          }
+        };
+        xhr.open("GET", "get_marcadores.php", true);
+        xhr.send();
+      }
+    </script>
+    <script src="index.js" defer></script>
+    <script>
+      // Chame a função de inicialização do mapa quando o DOM estiver pronto
+      document.addEventListener('DOMContentLoaded', function () {
+        initMap(
+        );
+      });
+    </script>
+  </body>
+</html>

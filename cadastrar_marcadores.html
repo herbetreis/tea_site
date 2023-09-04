@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CADASTRO MARCADORES</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="container.css">
+</head>
+<body>
+  <div class="container">
+    <a href='./main.html'><button>HOME</button></a> <a href='./adm_marcadores.html'><button>MARCADORES</button></a>
+    <h1>Cadastrar Marcadores</h1>
+    <form action="cadastrar_marcadores.php" method="post">
+        <label for="nome">Nome do Marcador:</label>
+        <input type="text" id="nome" name="nome" required><br>
+        <label for="descricao">Descrição:</label>
+        <textarea id="descricao" name="descricao" required></textarea><br>
+        <label for="latitude">Latitude:</label>
+        <input type="text" id="latitude" name="latitude" required><br>
+        <label for="longitude">Longitude:</label>
+        <input type="text" id="longitude" name="longitude" required><br>
+        <button type="submit">Cadastrar Marcador</button>
+    </form>
+    </div>
+</body>
+</html>
