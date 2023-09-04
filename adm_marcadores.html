@@ -22,6 +22,7 @@
                     <th>DESCRIÇÃO</th>
                     <th>LATITUDE</th>
                     <th>LONGITUDE</th>
+                    <th>AÇÕES</th> <!-- Adicione uma coluna para ações (Editar/Excluir) -->
                 </tr>
             </thead>
             <tbody>
@@ -33,9 +34,50 @@
         <a href='./cadastrar_marcadores.html' class="btn btn-primary">CADASTRAR MARCADORES</a>
     </div>
 
-    <script src="adm_marcadores.js"></script>
+    <!-- Modal para editar/excluir marcador -->
+    <div class="modal fade" id="editarMarcadorModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Editar Marcador</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Adicione os campos de edição aqui (Nome, Descrição, Latitude, Longitude) -->
+                    <form id="editForm">
+                        <div class="form-group">
+                            <label for="editNome">Nome:</label>
+                            <input type="text" class="form-control" id="editNome">
+                        </div>
+                        <div class="form-group">
+                            <label for="editDescricao">Descrição:</label>
+                            <textarea class="form-control" id="editDescricao"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="editLatitude">Latitude:</label>
+                            <input type="text" class="form-control" id="editLatitude">
+                        </div>
+                        <div class="form-group">
+                            <label for="editLongitude">Longitude:</label>
+                            <input type="text" class="form-control" id="editLongitude">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-danger" id="excluirMarcador">Excluir</button>
+                    <button type="button" class="btn btn-primary" id="salvarEdicao">Salvar Alterações</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <!-- Inclua os scripts do Bootstrap 5 no final do body -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <!-- Inclua o jQuery e os scripts do Bootstrap 5 no final do body -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Inclua o seu JavaScript personalizado para lidar com a edição/exclusão -->
+    <script src="adm_marcadores.js"></script>
 </body>
 </html>
