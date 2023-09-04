@@ -10,8 +10,6 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 // Verifique a conexão
 if ($conn->connect_error) {
     die("Erro de conexão com o banco de dados: " . $conn->connect_error);
-} else {
-    echo "Conexão com o banco de dados estabelecida com sucesso.";
 }
 
 // Obtenha os dados do formulário
@@ -24,11 +22,13 @@ $longitude = $_POST["longitude"]; // Longitude
 $sql = "INSERT INTO marcadores (nome, descricao, latitude, longitude) VALUES ('$nome', '$descricao', '$latitude', '$longitude')";
 
 if ($conn->query($sql) === TRUE) {
-    echo "Marcador cadastrado com sucesso!";
+    // Redirecionar para a página main.html com parâmetro de sucesso
+    header("Location: adm_marcadores.html?success=1");
+    exit(); // Sair para evitar qualquer saída adicional do PHP
 } else {
     echo "Erro ao cadastrar o marcador: " . $conn->error;
 }
 
-// Feche a conexão com o banco de dados
+// Fechar a conexão com o banco de dados
 $conn->close();
 ?>
