@@ -2,8 +2,8 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
     margin: 0;
+    background: #FFFFFF url("img/background.png") no-repeat right top fixed;
 }
 
 table {
@@ -106,3 +106,10 @@ button:hover {
 button[type="submit"]:hover {
     background-color: #218838;
 }
+.row-head {
+    text-align: center;
+    background-color: #0056b3;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
