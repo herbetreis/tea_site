@@ -14,4 +14,7 @@ Nessa pagina javascript nos temos nosso backend para estilizar nosso mapa, retir
 
 Também é realizado o tratamento dos marcadores (get.marcadores.php), é feito a consulta no banco de dados mysql (schema: tea_site | ,tabela: marcadores), para resgatar os marcadores (clientes/parceiros) que foram cadastrado previamente, após feito isso é mostrado no mapa interativo na pagina principal (main.html).
 
-## get_marcadores.php
+## {get_marcadores.php}
+Pela vez, nos temos a pagina get_marcadores.php, ele faz a conexão com o banco de  dados e a consulta dos marcadores que estão cadastrados.
+
+## {cadastrar_marcadores}
