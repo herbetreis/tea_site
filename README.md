@@ -9,7 +9,11 @@
 
  Nesta mesma pagina, ao clicar em cada marcador cadastrado, você consegue verificar as informações adicionais personalizadas para aquele client/clinica/parceiro. As personalizações serão implementadas mas já temos algumas em mente (Comentarios, avaliações, foto do parceiro, entre outros.)
 
+ ![Alt text](./img/readme.2.png)
+
  Seguindo após o mapa, nos encontramos o nosso chatbot (botpress) personalizado para os usuários do nosso site, dando dicas de como acessar e até mesmo sobre o assunto TEA.
+
+  ![Alt text](./img/readme.3.png)
 
 ### {index.js}
 Nessa pagina javascript nos temos nosso backend para estilizar nosso mapa, retirando/colocando alguns elementos para que não fique um mapa generico. Como se trata do assunto TEA nos retiramos tudo que não esteja claro, que polua a visualização e que não leve ao objetivo claro que é os nossos clientes/parceiros.
@@ -21,6 +25,8 @@ Pela vez, nos temos a pagina get_marcadores.php, ele faz a conexão com o banco 
 
 ## {cadastrar_marcadores.html}
 Nesta pagina é mostrado um formulário, que é utilizado pelo colaboradores do TEA SITE para cadastrar os clientes/clinicas que foram validados para ser um parceiro TEA.
+
+ ![Alt text](./img/readme.5.png)
 
 ### {cadastrar_marcadores.php}
 Onde tudo é processado, faz a conexão com o banco de dados do TEA SITE e utiliza o metodo POST para enviar os dados para o banco de dados.
