@@ -9,3 +9,9 @@
 
  Seguindo após o mapa, nos encontramos o nosso chatbot (botpress) personalizado para os usuários do nosso site, dando dicas de como acessar e até mesmo sobre o assunto TEA.
 
+## {index.js}
+Nessa pagina javascript nos temos nosso backend para estilizar nosso mapa, retirando/colocando alguns elementos para que não fique um mapa generico. Como se trata do assunto TEA nos retiramos tudo que não esteja claro, que polua a visualização e que não leve ao objetivo claro que é os nossos clientes/parceiros.
+
+Também é realizado o tratamento dos marcadores (get.marcadores.php), é feito a consulta no banco de dados mysql (schema: tea_site | ,tabela: marcadores), para resgatar os marcadores (clientes/parceiros) que foram cadastrado previamente, após feito isso é mostrado no mapa interativo na pagina principal (main.html).
+
+## get_marcadores.php
