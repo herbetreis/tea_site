@@ -31,5 +31,10 @@ Nesta pagina é mostrado um formulário, que é utilizado pelo colaboradores do 
 ### {cadastrar_marcadores.php}
 Onde tudo é processado, faz a conexão com o banco de dados do TEA SITE e utiliza o metodo POST para enviar os dados para o banco de dados.
 
+## {adm_marcadores.html}
+Onde é feito a administração dos nossos marcadores diretamente pelo SITE TEA, é possivel, editar, excluir e outras funcionalidades.
+
+ ![Alt text](./img/readme.6.png)
+
 
 
