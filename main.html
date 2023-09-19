@@ -54,7 +54,8 @@
                             <input type="password" class="form-control" id="exampleInputPassword1">
                         </div>
                         <span>Não tem conta ?</span>
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#registerModal">Cadastre-se</a>
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#registerModal">Cadastre-se</a><br>
+                        <br>
                         <button type="submit" class="btn btn-primary" >Entrar</button>
                     </form>
                 </div>
@@ -66,7 +67,6 @@
     </div>
 
     <!-- MODAL DO CADASTRO -->
-<!-- Modal de Registro -->
 
 <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -74,10 +74,12 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="registerModalLabel">Registro</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
+            </div>  
+
             <div class="modal-body">
+
                 <!-- Formulário de Registro -->
-                <form method="post" action="registrar.php"> <!-- Substitua "registrar.php" pelo nome do seu script PHP de registro -->
+                <form method="post" action="controladores_php/registrar.php"> <!-- Substitua "registrar.php" pelo nome do seu script PHP de registro -->
                     <div class="mb-3">
                         <label for="nomeCompleto" class="form-label">Nome Completo</label>
                         <input type="text" class="form-control" id="nomeCompleto" name="nomeCompleto" required>
@@ -90,6 +92,10 @@
                         <label for="senhaRegistro" class="form-label">Senha</label>
                         <input type="password" class="form-control" id="senhaRegistro" name="senhaRegistro" required>
                     </div>
+                    <div class="mb-3">
+                        <label for="senhaConfirmacao" class="form-label">Confirme a senha</label>
+                        <input type="password" class="form-control" id="senhaConfirmacao" name="senhaConfirmacao" required>
+                    </div>
                     <button type="submit" class="btn btn-primary">Registrar</button>
                 </form>
             </div>
@@ -99,10 +105,6 @@
         </div>
     </div>
 </div>
-
-
-
-
 
     <!-- Codigo JavaScript para recuperar os marcadores e adicioná-los ao mapa -->
     <script>
