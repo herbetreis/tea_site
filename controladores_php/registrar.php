@@ -1,9 +1,17 @@
 <?php
-// ... código de conexão com o banco de dados ...
+// Configuração da conexão com o banco de dados
 $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "tea_site";
+
+// Crie uma conexão com o banco de dados
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Verifique se a conexão foi estabelecida com sucesso
+if ($conn->connect_error) {
+    die("Erro na conexão com o banco de dados: " . $conn->connect_error);
+}
 
 // Obtenha os dados do formulário de registro
 $nomeCompleto = $_POST["nomeCompleto"]; // Nome Completo
@@ -34,8 +42,8 @@ if ($result->num_rows > 0) {
     $insereUsuario = "INSERT INTO usuarios (nome_completo, email, senha) VALUES ('$nomeCompleto', '$emailRegistro', '$senhaHashed')";
 
     if ($conn->query($insereUsuario) === TRUE) {
-        // Registro bem-sucedido, redirecione para a página de login com mensagem de sucesso
-        header("Location: login.php?success=1");
+        // Registro bem-sucedido, redirecione para a página principal com mensagem de sucesso
+        header("Location: /tea_site/main.html");
         exit();
     } else {
         echo "Erro ao cadastrar o usuário: " . $conn->error;
