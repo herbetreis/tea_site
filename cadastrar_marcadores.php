@@ -23,7 +23,7 @@ $sql = "INSERT INTO marcadores (nome, descricao, latitude, longitude) VALUES ('$
 
 if ($conn->query($sql) === TRUE) {
     // Redirecionar para a página main.html com parâmetro de sucesso
-    header("Location: adm_marcadores.html?success=1");
+    header("Location: adm_marcadores.php?success=1");
     exit(); // Sair para evitar qualquer saída adicional do PHP
 } else {
     echo "Erro ao cadastrar o marcador: " . $conn->error;

@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Faça uma solicitação AJAX para buscar os dados dos marcadores do servidor
-    fetch("adm_marcadores.php")
+    fetch("conexão_adm_marcadores.php")
         .then(response => response.json())
         .then(data => {
             populateTable(data);
