@@ -1,34 +1,67 @@
 <?php
-// Conecte-se ao banco de dados MySQL (substitua com suas próprias credenciais)
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "tea_site";
+// Inclua o arquivo de configuração do banco de dados
+include_once "controladores_php/config.php";
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Verifique a conexão
-if ($conn->connect_error) {
-    die("Erro de conexão com o banco de dados: " . $conn->connect_error);
-}
-
-// Obtenha os dados do formulário
-$nome = $_POST["nome"]; // Nome do Marcador
-$descricao = $_POST["descricao"]; // Descrição do Endereço
-$latitude = $_POST["latitude"]; // Latitude
-$longitude = $_POST["longitude"]; // Longitude
-
-// Insira os dados do marcador no banco de dados
-$sql = "INSERT INTO marcadores (nome, descricao, latitude, longitude) VALUES ('$nome', '$descricao', '$latitude', '$longitude')";
-
-if ($conn->query($sql) === TRUE) {
-    // Redirecionar para a página main.html com parâmetro de sucesso
-    header("Location: adm_marcadores.php?success=1");
-    exit(); // Sair para evitar qualquer saída adicional do PHP
+// Verifique se o formulário foi enviado
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    // Recupere os dados do formulário
+    $nome = $_POST["nome"];
+    $descricao = $_POST["descricao"];
+    $latitude = $_POST["latitude"];
+    $longitude = $_POST["longitude"];
+    
+    // Verifique se um arquivo de imagem foi enviado
+    if (isset($_FILES["fotoPerfil"]) && $_FILES["fotoPerfil"]["error"] === UPLOAD_ERR_OK) {
+        $imagem_tmp = $_FILES["fotoPerfil"]["tmp_name"];
+        $imagem_nome = $_FILES["fotoPerfil"]["name"];
+        
+        // Mova a imagem para o diretório de destino (você precisa definir o diretório de destino)
+        $caminho_destino = "caminho/para/diretorio/de/imagens/" . $imagem_nome;
+        
+        if (move_uploaded_file($imagem_tmp, $caminho_destino)) {
+            // O upload da imagem foi bem-sucedido
+            // Agora você pode salvar o caminho da imagem no banco de dados ou fazer o que for necessário com ela
+        } else {
+            // Erro no upload da imagem
+            $response["success"] = false;
+            $response["message"] = "Erro no upload da imagem.";
+            echo json_encode($response);
+            exit();
+        }
+    }
+    
+    // Inserir os dados do marcador no banco de dados
+    $sql = "INSERT INTO marcadores (nome, descricao, latitude, longitude, foto_perfil) VALUES (?, ?, ?, ?, ?)";
+    
+    if ($stmt = $conn->prepare($sql)) {
+        $stmt->bind_param("ssdds", $nome, $descricao, $latitude, $longitude, $caminho_destino);
+        
+        if ($stmt->execute()) {
+            // Inserção do marcador no banco de dados foi bem-sucedida
+            $response["success"] = true;
+            $response["message"] = "Marcador cadastrado com sucesso!";
+        } else {
+            // Erro na execução da inserção do marcador no banco de dados
+            $response["success"] = false;
+            $response["message"] = "Erro ao cadastrar o marcador: " . $stmt->error;
+        }
+        
+        $stmt->close();
+    } else {
+        // Erro na preparação da consulta SQL
+        $response["success"] = false;
+        $response["message"] = "Erro na preparação da consulta SQL: " . $conn->error;
+    }
 } else {
-    echo "Erro ao cadastrar o marcador: " . $conn->error;
+    // Requisição não é POST, retorne um erro
+    $response["success"] = false;
+    $response["message"] = "Método de requisição inválido.";
 }
 
-// Fechar a conexão com o banco de dados
+// Feche a conexão com o banco de dados
 $conn->close();
+
+// Retorne a resposta como JSON
+header("Content-Type: application/json");
+echo json_encode($response);
 ?>

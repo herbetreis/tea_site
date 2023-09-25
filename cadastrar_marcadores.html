@@ -42,8 +42,15 @@
             <label for="longitude" class="form-label">Longitude:</label>
             <input type="text" class="form-control" id="longitude" name="longitude" required>
         </div>
+        <div class="mb-3">
+            <label for="fotoPerfil" class="form-label">Foto de Perfil:</label>
+            <input type="file" class="form-control" id="fotoPerfil" name="fotoPerfil" accept="image/*">
+        </div>
+        
         <button type="submit" class="btn btn-success">Cadastrar Marcador</button>
     </form>
+    <form action="cadastrar_marcadores.php" method="post" enctype="multipart/form-data">
+
   </div>
     </div>
   
