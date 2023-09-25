@@ -86,6 +86,9 @@ if (!isset($_SESSION['usuario_id'])) {
                             <label for="editLongitude">Longitude:</label>
                             <input type="text" class="form-control" id="editLongitude">
                         </div>
+                        <div class="form-group">
+                <label for="editFotoPerfil">Foto de Perfil:</label>
+                <input type="file" class="form-control-file" id="editFotoPerfil" name="editFotoPerfil">
                     </form>
                 </div>
                 <div class="modal-footer">

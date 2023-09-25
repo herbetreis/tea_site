@@ -142,21 +142,6 @@ function initMap() {
             infoWindow.open(map, marker);
           });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
           markers.push(marker);
         });
       }

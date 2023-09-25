@@ -30,6 +30,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 document.getElementById("editLatitude").value = marcador.latitude;
                 document.getElementById("editLongitude").value = marcador.longitude;
 
+                // Ative o modal de edição/exclusão
+                const editarMarcadorModal = new bootstrap.Modal(document.getElementById("editarMarcadorModal"));
+                editarMarcadorModal.show();
+
                 // Configure o botão de exclusão para excluir este marcador
                 const excluirMarcadorButton = document.getElementById("excluirMarcador");
                 excluirMarcadorButton.addEventListener("click", function () {
@@ -49,7 +53,6 @@ document.addEventListener("DOMContentLoaded", function () {
                             // Marcador excluído com sucesso, você pode atualizar a tabela ou fazer outras ações aqui
                             console.log("Marcador excluído com sucesso!");
                             // Feche o modal após a exclusão
-                            const editarMarcadorModal = new bootstrap.Modal(document.getElementById("editarMarcadorModal"));
                             editarMarcadorModal.hide();
                         } else {
                             console.error("Erro ao excluir o marcador:", result.message);
@@ -57,16 +60,48 @@ document.addEventListener("DOMContentLoaded", function () {
                     })
                     .catch(error => console.error("Erro ao excluir o marcador:", error));
                 });
-                
-
-                // Ative o modal de edição/exclusão
-                const editarMarcadorModal = new bootstrap.Modal(document.getElementById("editarMarcadorModal"));
-                editarMarcadorModal.show();
             });
 
             acoesCell.appendChild(editarButton);
         });
     }
+
+    // Adicione um evento de clique para o botão "Salvar Alterações"
+    document.getElementById("salvarEdicao").addEventListener("click", function () {
+        // Coletar os dados do formulário
+        const novoNome = document.getElementById("editNome").value;
+        const novaDescricao = document.getElementById("editDescricao").value;
+        const novaLatitude = document.getElementById("editLatitude").value;
+        const novaLongitude = document.getElementById("editLongitude").value;
+        const fotoPerfil = document.getElementById("editFotoPerfil").files[0]; // Obtenha o arquivo de imagem
+
+        // Crie um objeto FormData para enviar os dados do formulário, incluindo a imagem
+        const formData = new FormData();
+        formData.append("editNome", novoNome);
+        formData.append("editDescricao", novaDescricao);
+        formData.append("editLatitude", novaLatitude);
+        formData.append("editLongitude", novaLongitude);
+        formData.append("editFotoPerfil", fotoPerfil);
+
+        // Faça uma solicitação AJAX para enviar os dados atualizados para o servidor
+        fetch("../tea_site/controladores_php/atualizar_marcador.php", {
+            method: "POST",
+            body: formData // Use o objeto FormData como corpo da solicitação
+        })
+        .then(response => response.json())
+        .then(result => {
+            if (result.success) {
+                // Dados do marcador atualizados com sucesso, você pode atualizar a tabela ou fazer outras ações aqui
+                console.log("Dados do marcador atualizados com sucesso!");
+                // Feche o modal após a atualização
+                const editarMarcadorModal = new bootstrap.Modal(document.getElementById("editarMarcadorModal"));
+                editarMarcadorModal.hide();
+            } else {
+                console.error("Erro ao atualizar os dados do marcador:", result.message);
+            }
+        })
+        .catch(error => console.error("Erro ao atualizar os dados do marcador:", error));
+    });
 
     // Faça uma solicitação AJAX para buscar os dados dos marcadores do servidor
     fetch("conexão_adm_marcadores.php")
@@ -75,4 +110,7 @@ document.addEventListener("DOMContentLoaded", function () {
             populateTable(data);
         })
         .catch(error => console.error("Erro ao buscar dados:", error));
+
+        
 });
+
