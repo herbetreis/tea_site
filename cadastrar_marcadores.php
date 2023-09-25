@@ -15,12 +15,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $imagem_tmp = $_FILES["fotoPerfil"]["tmp_name"];
         $imagem_nome = $_FILES["fotoPerfil"]["name"];
         
-        // Mova a imagem para o diretório de destino (você precisa definir o diretório de destino)
-        $caminho_destino = "caminho/para/diretorio/de/imagens/" . $imagem_nome;
+        // Defina o diretório de destino para a imagem (você precisa definir o diretório de destino)
+        $diretorio_destino = "C:\xampp\htdocs\tea_site\img\perfil\\";
+        $caminho_destino = $diretorio_destino . $imagem_nome;
         
         if (move_uploaded_file($imagem_tmp, $caminho_destino)) {
             // O upload da imagem foi bem-sucedido
-            // Agora você pode salvar o caminho da imagem no banco de dados ou fazer o que for necessário com ela
+            // Agora você pode salvar o caminho da imagem no banco de dados
         } else {
             // Erro no upload da imagem
             $response["success"] = false;
@@ -30,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
     }
     
-    // Inserir os dados do marcador no banco de dados
+    // Inserir os dados do marcador no banco de dados, incluindo o caminho da imagem
     $sql = "INSERT INTO marcadores (nome, descricao, latitude, longitude, foto_perfil) VALUES (?, ?, ?, ?, ?)";
     
     if ($stmt = $conn->prepare($sql)) {
